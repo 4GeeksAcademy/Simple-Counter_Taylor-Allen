@@ -4,30 +4,34 @@ export default function home() {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(true);
 
-  const timer = useRef();
+  const SecondsCounter = useRef();
 
   useEffect(() => {
     if (running) {
-      timer.current = setInterval(() => {
+      SecondsCounter.current = setInterval(() => {
         setTime((pre) => pre + 1);
       }, 1000);
     }
-    return () => clearInterval(timer.current);
+    return () => clearInterval(SecondsCounter.current);
   }, [running]);
 
   return (
     <div className="stopwatch row d-flex justify-content-evenly text-center m-5 container">
-      <p className="timer">{format(time)}</p>
+      <p className="SecondsCounter">{format(time)}</p>
 
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-light" onClick={() => setTime(0)}>
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          onClick={() => setTime(0)}
+        >
           Restart
         </button>
         <button
           type="button"
-          class="btn btn-light"
+          class="btn btn-outline-light"
           onClick={() => {
-            if (running) clearInterval(timer.current);
+            if (running) clearInterval(SecondsCounter.current);
             setRunning(!running);
           }}
         >
